@@ -1,0 +1,468 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+JP:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap");
+
+:root {
+  --ink: #1c1c1a;
+  --paper: #eef0ea;
+  --paper-raised: #f7f8f4;
+  --line: rgba(28, 28, 26, 0.12);
+  --time: #3b4b9e;
+  --cross: #c98a2b;
+  --accent-green: #5e8c61;
+  --radius-s: 4px;
+  --radius-m: 10px;
+  --font-ui: "IBM Plex Sans JP", "Hiragino Sans", sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--font-ui);
+}
+
+#app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ---------- Header ---------- */
+
+.ds-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 32px;
+  border-bottom: 1px solid var(--line);
+  background: var(--paper-raised);
+  background-image: linear-gradient(var(--line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--line) 1px, transparent 1px);
+  background-size: 24px 24px;
+  background-position: -1px -1px;
+}
+
+.ds-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.ds-logo-mark {
+  font-family: var(--font-mono);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: -0.02em;
+}
+
+.ds-logo-mark span {
+  color: var(--time);
+}
+
+.ds-logo-mark span.cross {
+  color: var(--cross);
+}
+
+.ds-tagline {
+  font-size: 12px;
+  color: rgba(28, 28, 26, 0.55);
+}
+
+.ds-tabs {
+  display: flex;
+  gap: 4px;
+}
+
+.ds-tab {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  padding: 8px 16px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-s);
+  background: transparent;
+  color: rgba(28, 28, 26, 0.6);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.ds-tab:hover {
+  background: rgba(28, 28, 26, 0.05);
+}
+
+.ds-tab.active {
+  background: var(--ink);
+  color: var(--paper-raised);
+}
+
+/* ---------- Main / Panels ---------- */
+
+.ds-main {
+  flex: 1;
+  padding: 32px;
+  max-width: 980px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.ds-panel-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 0 0 4px;
+}
+
+.ds-panel-sub {
+  font-size: 14px;
+  color: rgba(28, 28, 26, 0.6);
+  margin: 0 0 24px;
+}
+
+/* ---------- Lens (hero) ---------- */
+
+.ds-lens {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 24px;
+}
+
+.ds-lens-axis {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 8px;
+}
+
+.ds-lens-axis-label {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.ds-lens-axis-label.time {
+  color: var(--time);
+}
+
+.ds-lens-axis-label.cross {
+  color: var(--cross);
+}
+
+.ds-slider {
+  flex: 1;
+  -webkit-appearance: none;
+  appearance: none;
+  height: 4px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--time), var(--cross));
+  outline: none;
+}
+
+.ds-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--paper-raised);
+  border: 3px solid var(--ink);
+  cursor: grab;
+}
+
+.ds-slider::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--paper-raised);
+  border: 3px solid var(--ink);
+  cursor: grab;
+}
+
+.ds-canvas-wrap {
+  height: 320px;
+  margin-top: 16px;
+}
+
+.ds-canvas-wrap canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.ds-month-picker {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+  align-items: center;
+}
+
+.ds-month-picker-label {
+  font-size: 12px;
+  color: rgba(28, 28, 26, 0.55);
+  margin-right: 4px;
+}
+
+.ds-month-btn {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  padding: 6px 12px;
+  border-radius: var(--radius-s);
+  border: 1px solid var(--line);
+  background: transparent;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.ds-month-btn.active {
+  background: var(--cross);
+  border-color: var(--cross);
+  color: var(--paper-raised);
+}
+
+.ds-legend {
+  display: flex;
+  gap: 18px;
+  margin-top: 18px;
+  font-size: 13px;
+}
+
+.ds-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ds-legend-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+}
+
+.ds-insight {
+  margin-top: 20px;
+  padding: 14px 16px;
+  background: var(--paper);
+  border-left: 3px solid var(--cross);
+  border-radius: var(--radius-s);
+  font-size: 13px;
+  line-height: 1.7;
+}
+
+/* ---------- Learn cards ---------- */
+
+.ds-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 720px) {
+  .ds-cards {
+    grid-template-columns: 1fr;
+  }
+  .ds-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+  }
+}
+
+.ds-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 22px;
+}
+
+.ds-card h3 {
+  margin: 0 0 8px;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ds-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: rgba(28, 28, 26, 0.8);
+  margin: 0 0 10px;
+}
+
+.ds-card ul {
+  margin: 0;
+  padding-left: 18px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: rgba(28, 28, 26, 0.75);
+}
+
+.ds-flow {
+  margin-top: 20px;
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.ds-flow-step {
+  flex: 1;
+  min-width: 160px;
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 16px;
+}
+
+.ds-flow-step .num {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: rgba(28, 28, 26, 0.45);
+}
+
+.ds-flow-step h4 {
+  margin: 4px 0 6px;
+  font-size: 14px;
+}
+
+.ds-flow-step p {
+  margin: 0;
+  font-size: 12.5px;
+  color: rgba(28, 28, 26, 0.7);
+  line-height: 1.6;
+}
+
+/* ---------- Quiz ---------- */
+
+.ds-quiz-card {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 28px;
+  max-width: 560px;
+}
+
+.ds-quiz-progress {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: rgba(28, 28, 26, 0.5);
+  margin-bottom: 10px;
+}
+
+.ds-quiz-prompt {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.ds-quiz-choices {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.ds-choice {
+  text-align: left;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-s);
+  background: var(--paper);
+  cursor: pointer;
+  font-family: var(--font-ui);
+  font-size: 14px;
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.ds-choice:hover {
+  border-color: var(--ink);
+}
+
+.ds-choice.correct {
+  background: rgba(94, 140, 97, 0.16);
+  border-color: var(--accent-green);
+}
+
+.ds-choice.incorrect {
+  background: rgba(193, 80, 46, 0.12);
+  border-color: #c1502e;
+}
+
+.ds-quiz-explanation {
+  margin-top: 18px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: rgba(28, 28, 26, 0.8);
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+}
+
+.ds-quiz-next {
+  margin-top: 18px;
+  font-family: var(--font-ui);
+  font-size: 13px;
+  padding: 8px 16px;
+  border-radius: var(--radius-s);
+  border: none;
+  background: var(--ink);
+  color: var(--paper-raised);
+  cursor: pointer;
+}
+
+.ds-quiz-result {
+  text-align: center;
+}
+
+.ds-quiz-result .score {
+  font-family: var(--font-mono);
+  font-size: 40px;
+  font-weight: 600;
+  margin: 12px 0;
+}
+
+/* ---------- Record ---------- */
+
+.ds-record-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+@media (max-width: 720px) {
+  .ds-record-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ds-stat {
+  background: var(--paper-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-m);
+  padding: 20px;
+}
+
+.ds-stat .label {
+  font-size: 12px;
+  color: rgba(28, 28, 26, 0.55);
+}
+
+.ds-stat .value {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 6px;
+}
+
+.ds-reset {
+  margin-top: 20px;
+  font-size: 12px;
+  color: rgba(28, 28, 26, 0.5);
+  background: none;
+  border: none;
+  text-decoration: underline;
+  cursor: pointer;
+  padding: 0;
+}
